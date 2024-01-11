@@ -36,7 +36,7 @@ pool.query("SELECT NOW()", (err: Error, res: any) => {
   }
 });
 
-const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 5555;
 
 app.get("/", async (req: Request, res: Response) => {
   try {
