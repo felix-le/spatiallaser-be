@@ -41,7 +41,9 @@ const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 app.get("/", async (req: Request, res: Response) => {
   try {
     // Fetch data from dfw_demo table
-    const result = await pool.query("SELECT * FROM dfw_demo");
+    const result = await pool.query(
+      `SELECT * FROM ${process.env.DB_TABLE_NAME}`
+    );
 
     // Send the data as JSON
     res.json(result.rows);
