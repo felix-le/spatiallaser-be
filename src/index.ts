@@ -42,7 +42,22 @@ app.get("/", async (req: Request, res: Response) => {
   try {
     // Fetch data from dfw_demo table
     const result = await pool.query(
-      `SELECT * FROM ${process.env.DB_TABLE_NAME}`
+      `SELECT * FROM ${process.env.DB_TABLE_VIEW}`
+    );
+
+    // Send the data as JSON
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching data from the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/demo", async (req: Request, res: Response) => {
+  try {
+    // Fetch data from dfw_demo table
+    const result = await pool.query(
+      `SELECT income, population, ST_AsText(ST_centroid(spatialobj)) as centroid, ST_AsGeoJSON(spatialobj) as geometry FROM ${process.env.DB_TABLE_DEMO}`
     );
 
     // Send the data as JSON
