@@ -1,12 +1,13 @@
 import dotenv from "dotenv";
-dotenv.config();
 import express, { Router } from "express";
-import { statusConstants } from "@constants/status.constants";
+dotenv.config();
+
+import { getAreaCentroidInside, getAreaInsideCircle, getMapData } from "@controllers/mapController";
 
 const router: Router = express.Router();
 
-router.get("/", function (req, res, next) {
-  res.status(statusConstants.SUCCESS_CODE).json("Welcome to the first - API");
-});
+router.get("/map", getMapData);
+router.get("/area-centroid-inside", getAreaCentroidInside);
+router.get("/area-inside-circle", getAreaInsideCircle);
 
 export default router;
